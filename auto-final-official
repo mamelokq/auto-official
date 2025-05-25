@@ -1,0 +1,12 @@
+-- Run auto players (composite script)
+task.spawn(function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/mamelokq/auto-official/refs/heads/main/auto-players-paste", true))()
+end)
+
+-- Small wait to let the first initialize cleanly (adjustable)
+task.wait(4)
+
+-- Run elemental UI in its own thread
+task.spawn(function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/mamelokq/auto-official/refs/heads/main/elemental-ui", true))()
+end)
