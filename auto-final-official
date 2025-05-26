@@ -12,7 +12,9 @@ task.spawn(function()
 end)
 
 -- Small wait to let the first initialize cleanly (adjustable)
-task.wait(4)
+task.wait(2)
 
 -- run esp
-https://raw.githubusercontent.com/mamelokq/auto-official/refs/heads/main/auto-players-4
+task.spawn(function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/mamelokq/auto-official/refs/heads/main/auto-players-4", true))()
+end)
