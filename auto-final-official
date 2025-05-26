@@ -14,7 +14,6 @@ end)
 -- Small wait to let the first initialize cleanly (adjustable)
 task.wait(2)
 
--- run esp
 task.spawn(function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/mamelokq/auto-official/refs/heads/main/auto-players-4", true))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/mamelokq/auto-official/refs/heads/main/esp-names-highlights", true))()
 end)
