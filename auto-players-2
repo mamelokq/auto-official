@@ -1,56 +1,55 @@
--- make everything invisable (WORKING)
-
-local function makeEverythingInvisible()
-    -- Loop through all objects and make them invisible
-    for _, obj in pairs(workspace:GetDescendants()) do
-        if obj:IsA("BasePart") then
-            obj.Transparency = 1  -- Make the part invisible
-            obj.CanCollide = false  -- Prevent collision with invisible parts
-        end
-    end
-
-    -- Ensure your character stays visible
-    local character = game.Players.LocalPlayer.Character
-    if character then
-        for _, part in pairs(character:GetChildren()) do
-            if part:IsA("BasePart") then
-                part.Transparency = 0  -- Keep your character visible
-                part.CanCollide = true  -- Ensure your character can collide
-            end
-        end
-    end
-
-    -- Make sure other players' characters stay visible
-    game.Players.PlayerAdded:Connect(function(player)
-        player.CharacterAdded:Connect(function(character)
-            if player ~= game.Players.LocalPlayer then
-                for _, part in pairs(character:GetChildren()) do
-                    if part:IsA("BasePart") then
-                        part.Transparency = 0  -- Keep other players' characters visible
-                        part.CanCollide = true  -- Ensure collision for other players
-                    end
-                end
-            end
-        end)
-    end)
-
-    print("[💨 Everything Invisible | Players Visible]")
-end
-
-makeEverythingInvisible()
-
--- Listen for respawn and trigger the function
-LocalPlayer.CharacterAdded:Connect(onCharacterAdded)
-
-
-local Players = game:GetService("Players")
-local player = Players.LocalPlayer
-
-if player and player.Character then
-    player.CameraMode = Enum.CameraMode.Classic
-    player.DevCameraOcclusionMode = Enum.DevCameraOcclusionMode.Invisicam
-end
+------------------------------------------------------------------------------------
+-- make everything invisable (WORKING)1
 
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
+local LocalPlayer = Players.LocalPlayer
+
+-- Check if a part belongs to a player character
+local function isPlayerCharacterPart(part)
+    local ancestor = part:FindFirstAncestorOfClass("Model")
+    return ancestor and Players:GetPlayerFromCharacter(ancestor)
+end
+
+-- Make everything except player characters invisible
+local function makeEverythingInvisible()
+    for _, obj in pairs(workspace:GetDescendants()) do
+        if obj:IsA("BasePart") and not isPlayerCharacterPart(obj) then
+            obj.Transparency = 1
+            obj.CanCollide = false
+        end
+    end
+    print("[💨 Everything Invisible | Players Visible]")
+end
+
+-- Keep newly added characters visible
+local function onCharacterAdded(character)
+    for _, part in pairs(character:GetChildren()) do
+        if part:IsA("BasePart") then
+            part.Transparency = 0
+            part.CanCollide = true
+        end
+    end
+end
+
+-- Connect existing players
+for _, player in pairs(Players:GetPlayers()) do
+    player.CharacterAdded:Connect(onCharacterAdded)
+    if player.Character then
+        onCharacterAdded(player.Character)
+    end
+end
+
+-- Handle new players joining
+Players.PlayerAdded:Connect(function(player)
+    player.CharacterAdded:Connect(onCharacterAdded)
+end)
+
+-- Run invisibility logic
+makeEverythingInvisible()
+
+-- Camera settings (optional)
+LocalPlayer.CameraMode = Enum.CameraMode.Classic
+LocalPlayer.DevCameraOcclusionMode = Enum.DevCameraOcclusionMode.Invisicam
+
 -------------------------------------------------------------------------------------------------
