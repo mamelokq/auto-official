@@ -6,7 +6,7 @@ local VirtualInputManager = game:GetService("VirtualInputManager")
 local player = Players.LocalPlayer
 
 local function simulateOneKeyPress()
-	task.wait(1)
+	task.wait(2)
 	VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.One, false, game)
 	task.wait(0.05)
 	VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.One, false, game)
