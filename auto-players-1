@@ -6,7 +6,7 @@ local VirtualInputManager = game:GetService("VirtualInputManager")
 local player = Players.LocalPlayer
 
 local function simulateOneKeyPress()
-	task.wait(2)
+	task.wait(1)
 	VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.One, false, game)
 	task.wait(0.05)
 	VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.One, false, game)
@@ -37,7 +37,7 @@ end
 
 player.CharacterAdded:Connect(function()
 	running = false
-	task.wait(3)
+	task.wait(2)
 	startPressingR()
 end)
 
