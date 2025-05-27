@@ -17,30 +17,6 @@ player.CharacterAdded:Connect(function()
 	simulateOneKeyPress()
 end)
 
-local Players = game:GetService("Players")
-local VirtualInputManager = game:GetService("VirtualInputManager")
-local player = Players.LocalPlayer
-
-local running = false
-
-local function startPressingR()
-	if running then return end
-	running = true
-
-	while running do
-		VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.R, false, game)
-		task.wait(0.05)
-		VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.R, false, game)
-		task.wait(12)
-	end
-end
-
-player.CharacterAdded:Connect(function()
-	running = false
-	task.wait(2)
-	startPressingR()
-end)
-
 ---------------------------------------------------------------------------------------------
 
 ---------------------------------------------------------------------------------------------
