@@ -11,9 +11,18 @@ task.spawn(function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/mamelokq/auto-official/refs/heads/main/elemental-ui", true))()
 end)
 
--- Small wait to let the first initialize cleanly (adjustable)
+-- Small wait to let the second initialize cleanly
 task.wait(2)
 
+-- ESP and name highlights
 task.spawn(function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/mamelokq/auto-official/refs/heads/main/esp-names-highlights", true))()
+end)
+
+-- Small wait for safety before injecting Chat Spy GUI
+task.wait(1.5)
+
+-- Chat Spy UI
+task.spawn(function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/mamelokq/auto-official/refs/heads/main/chat-spy-auto", true))()
 end)
